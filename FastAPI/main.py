@@ -67,7 +67,6 @@ async def get_weather(city: str, db: Database = Depends(get_database)):
         )
         response.raise_for_status()
         data = response.json()
-
         logger.info(f"Weather data received for {city}: {data}")
         
         # Save weather data to the database
@@ -78,9 +77,7 @@ async def get_weather(city: str, db: Database = Depends(get_database)):
                 humidity=int(data["main"]["humidity"]),
                 weather_description=data["weather"][0]["description"],
             ))
-
         return data
-
     except requests.RequestException as e:
         logger.error(f"Failed to get weather data for {city}: {str(e)}")
         raise HTTPException(status_code=500, detail=f"Failed to get weather data: {str(e)}")
@@ -97,3 +94,4 @@ async def get_weather_logs(city: str, db=Depends(get_db)):
     )
     result = await db.execute(query)
     return result.fetchall()
+
