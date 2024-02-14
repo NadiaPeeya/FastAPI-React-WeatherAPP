@@ -56,6 +56,10 @@ def get_db():
 async def read_root():
     return {"message": "Welcome to the FastAPI Weather App!"}
 
+if __name__ == '__main__':
+
+    uvicorn.run(f"{Path(__file__).stem}:app", host="127.0.0.1", port=8888, reload=True)
+
 @app.post("/weather{city}")
 async def get_weather(city: str, db: Database = Depends(get_database)):
     api_key = "635ce85c9428185f7a3cb18532e01b1f"
