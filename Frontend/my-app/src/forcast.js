@@ -8,7 +8,7 @@ function Forcast(props) {
   const [weather, setWeather] = useState({});
 
   const apiKey = process.env.API_KEY;
-
+  
   const search = (city) => {
   axios
     .post(`http://localhost:8000/weather${city}`)
