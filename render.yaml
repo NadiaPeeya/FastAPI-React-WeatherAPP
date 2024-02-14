@@ -1,0 +1,11 @@
+# render.yaml
+
+services:
+  - name: FastAPI
+    buildCommand: |
+      cd FastAPI
+      pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    env:
+      - key: RENDER_BACKEND
+        value: "1"
