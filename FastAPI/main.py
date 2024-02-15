@@ -10,7 +10,6 @@ from datetime import datetime, date
 from config import DATABASE_URL  
 
 Base = declarative_base()
-
 class WeatherLog(Base):
     __tablename__ = "weather_logs"
     id = Column(Integer, primary_key=True, index=True)
@@ -99,3 +98,7 @@ async def get_weather_logs(city: str, db=Depends(get_db)):
     result = await db.execute(query)
     return result.fetchall()
 
+if __name__ == '__main__':
+    import uvicorn
+
+    uvicorn.run("main:app", host="0.0.0.0", port=10000, reload=True)
