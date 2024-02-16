@@ -1,7 +1,7 @@
 from fastapi import FastAPI, HTTPException, Depends
 from fastapi.middleware.cors import CORSMiddleware
 from databases import Database
-from sqlalchemy import create_engine, Column, Integer, String, DateTime, func
+from sqlalchemy import create_engine, Column, Integer, String, Float, DateTime, func
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import requests
@@ -14,8 +14,8 @@ class WeatherLog(Base):
     __tablename__ = "weather_logs"
     id = Column(Integer, primary_key=True, index=True)
     city = Column(String(255), index=True)
-    temperature = Column(Integer)
-    humidity = Column(Integer)
+    temperature = Column(Float)
+    humidity = Column(Float)
     weather_description = Column(String(255))
     recorded_at = Column(DateTime, server_default=func.now())
 
